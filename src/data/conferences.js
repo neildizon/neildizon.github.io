@@ -1,0 +1,36 @@
+const event = (date, title, location, talk = '') => ({ date, title, location, talk });
+export const conferences = {
+  'Oral presentations': [
+    event('Dec 2023', 'A Webinar in Honor of the 60th Birthday of Prof. Noli N. Reyes', 'Quezon City, Philippines (remote, invited talk)', 'Quaternion-valued wavelets in colour image processing'),
+    event('Sep 2023', '6th European Conference on Computational Optimization (EUCCO)', 'Heidelberg, Germany', 'Online optimization for dynamic electrical impedance tomography'),
+    event('May 2023', 'SIAM Conference on Optimization (OP23)', 'Seattle, United States', 'Online optimization for dynamic electrical impedance tomography'),
+    event('Jul 2022', '32nd European Conference on Operational Research (EURO 2022)', 'Aalto University, Finland', 'Constraint reduction reformulations for projection algorithms'),
+    event('Dec 2021', '65th Annual Meeting of the Australian Mathematical Society', 'University of Newcastle, Australia', 'Quaternion-valued wavelets in colour image processing'),
+    event('Aug 2021', '13th International Society for Analysis, its Applications and Computation Congress', 'Ghent, Belgium (remote, invited talk)', 'A feasibility approach to quaternion-valued wavelet construction'),
+    event('Jun 2021', 'Mathematical Symposium in Memory of Professor Noli Reyes', 'Quezon City, Philippines (remote, invited talk)', 'Optimization in the construction of multidimensional wavelets'),
+    event('Feb 2021', 'Australian and New Zealand Industrial and Applied Mathematics (ANZIAM) Conference', 'Monash University, Australia (remote)', 'Constructions and applications of non-separable wavelets on the plane'),
+    event('Dec 2020', '64th Annual Meeting of the Australian Mathematical Society', 'University of New England, Australia (remote)', 'A feasibility approach to quaternion-valued wavelet construction'),
+    event('Aug 2020', 'Computational Techniques and Applications Conference (CTAC 2020)', 'University of New South Wales, Australia (remote)', 'Constructions and applications of non-separable wavelets on the plane'),
+    event('Feb 2020', 'Australia and New Zealand Industrial and Applied Mathematics (ANZIAM) Conference', 'Hunter Valley, Australia', 'Projection algorithms in wavelet construction as a feasibility problem'),
+    event('Dec 2019', '63rd Annual Meeting of the Australian Mathematical Society', 'Monash University, Australia', 'Projection algorithms in wavelet construction as a feasibility problem'),
+    event('Jul 2019', '12th International Society for Analysis, its Applications and Computation Congress', 'Universidade de Aveiro, Portugal', 'Optimization in the construction of nearly cardinal and nearly symmetric wavelets'),
+    event('Jul 2019', '13th International Conference on Sampling Theory and Applications (SampTA)', 'University of Bordeaux, France', 'Optimization in the construction of nearly cardinal and nearly symmetric wavelets'),
+    event('Dec 2018', '62nd Annual Meeting of the Australian Mathematical Society', 'University of Adelaide, Australia', 'Optimisation in the construction of symmetric and cardinal wavelets on the line'),
+    event('Nov 2018', '13th International Conference on Sampling Theory and Applications (SampTA)', 'University of Newcastle, Australia', 'Optimisation in the construction of symmetric and cardinal wavelets on the line'),
+    event('Aug 2018', 'Analysis of Variations, Optimal Control, and Applications to Design and Operations', 'University of Newcastle, Australia', 'An optimization approach to the construction of multidimensional wavelets'),
+  ],
+  'Poster presentations': [
+    event('Sep 2020', 'Virtual Heidelberg Laureate Forum', 'Heidelberg, Germany (remote)', 'Circumcentering reflections method for wavelet feasibility problems'),
+    event('Jun 2019', 'Aspects of Time–Frequency Analysis', 'Politecnico di Torino, Italy', 'Circumcentering reflections method for wavelet feasibility problems'),
+  ],
+  'Attendance': [
+    event('Dec 2023', 'Inverse Days 2023', 'Lahti, Finland'),
+    event('Nov 2023', 'AIX Forum: Inverse Problems', 'Helsinki, Finland'),
+    event('Sep 2023', '10th Heidelberg Laureate Forum, Young researcher participant', 'Heidelberg, Germany'),
+    event('Aug 2023', 'AI + Inversion Workshop', 'Tvärminne, Finland'),
+    event('Sep 2021', '8th Heidelberg Laureate Forum, Young researcher participant', 'Heidelberg, Germany (remote)'),
+    event('Feb 2018', 'Harmonic Analysis Conference Celebrating the Mathematical Legacy of Alan McIntosh', 'Australian National University, Australia'),
+    event('Dec 2017', '61st Annual Meeting of the Australian Mathematical Society', 'Macquarie University, Australia'),
+    event('Sep 2017', 'Jonathan M. Borwein Commemorative Conference', 'Newcastle, Australia'),
+  ],
+};
