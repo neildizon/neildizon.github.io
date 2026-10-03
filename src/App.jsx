@@ -3,11 +3,12 @@ import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Chip, Conta
 import { Link as RouterLink, NavLink, Route, Routes, useLocation } from 'react-router-dom';
 import { blues } from './theme';
 import { profile } from './data/profile';
-import { publications, preprints, theses } from './data/research';
-import { awards, experience } from './data/teaching';
+import { publications, preprints, theses, researchAwards } from './data/research';
+import { awards, experience, evaluations, supervision } from './data/teaching';
 import { conferences } from './data/conferences';
+import { leadership } from './data/leadership';
 
-const pages = [['Home', '/'], ['Research', '/research'], ['Teaching', '/teaching'], ['Conferences', '/conferences']];
+const pages = [['Home', '/'], ['Research', '/research'], ['Teaching', '/teaching'], ['Conferences', '/conferences'], ['Leadership', '/leadership']];
 const Arrow = ({ diagonal = false }) => <Box component="span" aria-hidden="true" sx={{ ml: .8 }}>{diagonal ? '↗' : '→'}</Box>;
 const Eyebrow = ({ children }) => <Typography component="p" variant="overline" color="primary" sx={{ mb: 2 }}>{children}</Typography>;
 
@@ -27,7 +28,7 @@ function Header() {
           <Box component="svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false" sx={{ width: 30, height: 30 }}><path d="M5 26V6L27 26V6M5 26L27 6" stroke={blues.cobalt} strokeWidth="1.5" fill="none"/><circle cx="16" cy="16" r="2.5" fill={blues.cobalt}/></Box>
           {profile.name}
         </Link>
-        <Stack component="nav" aria-label="Main navigation" direction="row" spacing={4} sx={{ display: { xs: 'none', md: 'flex' } }}>{navItems}</Stack>
+        <Stack component="nav" aria-label="Main navigation" direction="row" spacing={3} sx={{ display: { xs: 'none', md: 'flex' } }}>{navItems}</Stack>
         <IconButton id="menu-toggle" aria-label={open ? 'Close navigation' : 'Open navigation'} aria-expanded={open} aria-controls={open ? 'mobile-navigation' : undefined} onClick={() => setOpen(!open)} sx={{ display: { md: 'none' }, color: 'text.primary' }}>
           <Box component="svg" viewBox="0 0 24 24" aria-hidden="true" sx={{ width: 24, height: 24 }}><path d={open ? 'M6 6L18 18M18 6L6 18' : 'M4 7H20M4 12H20M4 17H20'} stroke="currentColor" fill="none" strokeWidth="1.5" /></Box>
         </IconButton>
@@ -55,6 +56,7 @@ function Publication({ item, compact = false }) {
       </Typography>
       <Typography variant="body2" color="text.secondary">{item.authors}</Typography>
       <Typography variant="body2" color="text.secondary" sx={{ mt: .5, fontStyle: 'italic' }}>{item.venue}</Typography>
+      {!compact && item.annotation && <Typography variant="body2" color="text.secondary" sx={{ mt: 2, pl: 2, borderLeft: 2, borderColor: 'primary.dark' }}>{item.annotation}</Typography>}
     </Box>
   </Box>;
 }
@@ -97,7 +99,7 @@ function Home() {
       </Stack>{publications.slice(0, 3).map(item=><Publication key={item.title} item={item} compact />)}</Container>
     </Box>
     <Container><Box sx={{ pt: { xs: 6, md: 8 }, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 4 }}>
-      <Box><Eyebrow>Beyond the page</Eyebrow><Typography variant="h2" sx={{ mb: 2 }}>Sharing ideas.<br />Building understanding.</Typography><Typography color="text.secondary" sx={{ mb: 2 }}>Explore my teaching experience and conference presentations.</Typography><Stack direction="row" sx={{ gap: 3 }}><Link component={RouterLink} to="/teaching">Teaching<Arrow /></Link><Link component={RouterLink} to="/conferences">Conferences<Arrow /></Link></Stack></Box>
+      <Box><Eyebrow>Beyond the page</Eyebrow><Typography variant="h2" sx={{ mb: 2 }}>Sharing ideas.<br />Building understanding.</Typography><Typography color="text.secondary" sx={{ mb: 2 }}>Explore my teaching, conference presentations, and academic leadership.</Typography><Stack direction="row" sx={{ gap: 3, flexWrap: 'wrap' }}><Link component={RouterLink} to="/teaching">Teaching<Arrow /></Link><Link component={RouterLink} to="/conferences">Conferences<Arrow /></Link><Link component={RouterLink} to="/leadership">Leadership<Arrow /></Link></Stack></Box>
     </Box></Container>
   </>;
 }
@@ -109,10 +111,17 @@ function PageIntro({ eyebrow, title, description }) {
   </Box>;
 }
 
-const researchSections = [ ['published', 'Published / accepted', publications], ['preprints', 'Preprints', preprints], ['theses', 'Theses', theses] ];
+const researchSections = [ ['published', 'Published / accepted', publications], ['preprints', 'Submitted / under review', preprints], ['theses', 'Theses', theses] ];
+function Recognition({ items, id }) {
+  return <Box component="section" aria-labelledby={id} sx={{ mb: 7 }}>
+    <Typography id={id} variant="h2" sx={{ mb: 3 }}>Recognition</Typography>
+    <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: items.length > 1 ? '1fr 1fr' : '1fr' }, gap: 3 }}>{items.map(award => <Box key={`${award.date}-${award.title}`} sx={{ p: 3, bgcolor: 'primary.light', borderRadius: 1 }}><Eyebrow>{award.date}</Eyebrow><Typography component="h3" variant="h3" sx={{ mb: 1 }}>{award.title}</Typography><Typography variant="body2" color="text.secondary">{award.institution}</Typography></Box>)}</Box>
+  </Box>;
+}
 function Research() {
   return <Container>
     <PageIntro eyebrow="Research" title="Ideas into methods." description="Publications and preprints in optimisation, inverse problems, wavelets, and imaging." />
+    <Recognition items={researchAwards} id="research-awards-title" />
     <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '210px 1fr' }, gap: { xs: 4, md: 6 } }}>
       <Box component="nav" aria-label="Research sections" sx={{ alignSelf: 'start', position: { md: 'sticky' }, top: 110 }}>
         <Typography variant="overline" color="text.secondary">On this page</Typography>
@@ -129,19 +138,23 @@ function Research() {
 function Teaching() {
   return <Container>
     <PageIntro eyebrow="Teaching" title="Making mathematics accessible." description="Teaching experience across undergraduate and postgraduate mathematics, from calculus and analysis to inverse problems." />
-    <Box component="section" aria-labelledby="awards-title" sx={{ mb: 7 }}><Typography id="awards-title" variant="h2" sx={{ mb: 3 }}>Recognition</Typography>
-      <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' }, gap: 3 }}>{awards.map(award=><Box key={award.date} sx={{ p: 3, bgcolor: 'primary.light', borderRadius: 1 }}><Eyebrow>{award.date}</Eyebrow><Typography component="h3" variant="h3" sx={{ mb: 1 }}>{award.title}</Typography><Typography variant="body2" color="text.secondary">{award.institution}</Typography></Box>)}</Box>
+    <Box component="section" aria-labelledby="evaluations-title" sx={{ mb: 7 }}><Typography id="evaluations-title" variant="h2" sx={{ mb: 3 }}>Student feedback</Typography>
+      <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' }, gap: 3 }}>{evaluations.map(item => <Box key={item.value} sx={{ p: 3, bgcolor: 'primary.light', borderRadius: 1 }}><Typography component="p" variant="h2" color="primary" sx={{ mb: 1 }}>{item.value}</Typography><Typography component="h3" variant="h3" sx={{ mb: 1 }}>{item.label}</Typography><Typography variant="body2" color="text.secondary">{item.detail}</Typography></Box>)}</Box>
     </Box>
+    <Recognition items={awards} id="awards-title" />
     <Box component="section" aria-labelledby="experience-title"><Typography id="experience-title" variant="h2" sx={{ mb: 2 }}>Teaching experience</Typography>
       {experience.map((entry,index)=><Box component="article" key={`${entry.role}-${index}`} sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '210px 1fr' }, gap: { xs: 1.5, md: 6 }, py: 4, borderBottom: 1, borderColor: 'divider' }}>
         <Typography variant="body2" color="primary">{entry.date}</Typography>
         <Box sx={{ minWidth: 0 }}><Typography component="h3" variant="h3" sx={{ mb: 1 }}>{entry.role}</Typography><Typography sx={{ fontSize: '.95rem', mb: 1.5 }}>{entry.institution}</Typography><Typography variant="body2" color="text.secondary">{entry.duties}</Typography>
           {entry.courses.length>0 && <Accordion disableGutters elevation={0} sx={{ mt: 2, border: 1, borderColor: 'divider', borderRadius: '6px !important', '&:before': { display: 'none' } }}>
-            <AccordionSummary expandIcon={<Box component="span" aria-hidden="true" sx={{ color: 'primary.main' }}>⌄</Box>} id={`courses-${index}-header`} aria-controls={`courses-${index}-content`}><Typography variant="body2" color="primary" sx={{ fontWeight: 550 }}>Course history ({entry.courses.length} teaching terms)</Typography></AccordionSummary>
+            <AccordionSummary expandIcon={<Box component="span" aria-hidden="true" sx={{ color: 'primary.main' }}>⌄</Box>} id={`courses-${index}-header`} aria-controls={`courses-${index}-content`}><Typography variant="body2" color="primary" sx={{ fontWeight: 550 }}>Course history</Typography></AccordionSummary>
             <AccordionDetails><Stack sx={{ gap: 2.5 }}>{entry.courses.map(term=><Box key={term.term}><Typography component="h4" variant="body2" sx={{ fontWeight: 600, mb: 1 }}>{term.term}</Typography><Box component="ul" sx={{ m: 0, pl: 2.5 }}>{term.items.map(item=><Typography component="li" key={item} variant="body2" color="text.secondary" sx={{ mb: .5 }}>{item}</Typography>)}</Box></Box>)}</Stack></AccordionDetails>
           </Accordion>}
         </Box>
       </Box>)}
+    </Box>
+    <Box component="section" aria-labelledby="supervision-title" sx={{ mt: 7 }}><Typography id="supervision-title" variant="h2" sx={{ mb: 2 }}>Supervision and mentoring</Typography>
+      {supervision.map(entry => <Box component="article" key={entry.title} sx={{ py: 3, borderBottom: 1, borderColor: 'divider' }}>{entry.date && <Typography variant="body2" color="primary" sx={{ mb: 1 }}>{entry.date}</Typography>}<Typography component="h3" variant="h3" sx={{ mb: 1 }}>{entry.title}</Typography>{entry.institution && <Typography variant="body2" sx={{ mb: 1 }}>{entry.institution}</Typography>}<Typography variant="body2" color="text.secondary">{entry.detail}</Typography></Box>)}
     </Box>
   </Container>;
 }
@@ -153,6 +166,19 @@ function Conferences() {
       <Stack direction="row" sx={{ alignItems: 'center', gap: 1.5, mb: 2 }}><Typography id={`conference-section-${sectionIndex}`} variant="h2">{category}</Typography><Chip label={items.length} size="small" sx={{ bgcolor: 'primary.light', color: 'primary.main' }} /></Stack>
       {items.map((entry,index)=><Box component="article" key={`${entry.date}-${index}`} sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '110px 1fr' }, gap: { xs: 1, sm: 4 }, py: 3, borderBottom: 1, borderColor: 'divider' }}>
         <Typography variant="body2" color="primary">{entry.date}</Typography><Box><Typography component="h3" variant="h3" sx={{ mb: 1 }}>{entry.title}</Typography>{entry.talk && <Typography variant="body2" sx={{ mb: 1 }}>{entry.talk}</Typography>}<Typography variant="body2" color="text.secondary">{entry.location}</Typography></Box>
+      </Box>)}
+    </Box>)}
+  </Container>;
+}
+
+function Leadership() {
+  return <Container>
+    <PageIntro eyebrow="Leadership and engagement" title="Connecting people and ideas." description="Conference and workshop organising, committee service, journal reviewing, and engagement with the mathematical community." />
+    {Object.entries(leadership).map(([category, entries], sectionIndex) => <Box component="section" key={category} aria-labelledby={`leadership-section-${sectionIndex}`} sx={{ mb: 7 }}>
+      <Typography id={`leadership-section-${sectionIndex}`} variant="h2" sx={{ mb: 2 }}>{category}</Typography>
+      {entries.map((entry, index) => <Box component="article" key={`${entry.date}-${index}`} sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '150px 1fr' }, gap: { xs: 1, sm: 4 }, py: 3, borderBottom: 1, borderColor: 'divider' }}>
+        <Box><Typography variant="body2" color="primary">{entry.date}</Typography>{entry.status && <Chip label={entry.status} size="small" sx={{ mt: 1, bgcolor: 'primary.light', color: 'primary.main' }} />}</Box>
+        <Box sx={{ minWidth: 0 }}><Typography variant="body2" color="primary" sx={{ mb: 1 }}>{entry.role}</Typography><Typography component="h3" variant="h3" sx={{ mb: 1 }}>{entry.title}</Typography>{entry.location && <Typography variant="body2" color="text.secondary">{entry.location}</Typography>}</Box>
       </Box>)}
     </Box>)}
   </Container>;
@@ -175,6 +201,6 @@ export default function App() {
   }, [pathname]);
   return <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}><Header />
     <Box component="main" id="main-content" tabIndex={-1} ref={main} sx={{ flex: 1, '&:focus': { outline: 'none' } }}>
-      <Routes><Route path="/" element={<Home />} /><Route path="/research" element={<Research />} /><Route path="/teaching" element={<Teaching />} /><Route path="/conferences" element={<Conferences />} /><Route path="*" element={<NotFound />} /></Routes>
+      <Routes><Route path="/" element={<Home />} /><Route path="/research" element={<Research />} /><Route path="/teaching" element={<Teaching />} /><Route path="/conferences" element={<Conferences />} /><Route path="/leadership" element={<Leadership />} /><Route path="*" element={<NotFound />} /></Routes>
     </Box><Footer /></Box>;
 }

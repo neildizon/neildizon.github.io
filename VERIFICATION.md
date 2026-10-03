@@ -16,4 +16,14 @@
 - Dark theme text contrast checked mathematically: primary text, secondary text, and blue accents against the page and card surfaces all exceed 4.5:1.
 - Blue link accents were brightened for the stronger gradient: against a conservative bright-blue background sample, secondary text is 4.98:1 and link accents are 5.08:1.
 
-The live GitHub deployment has not been run: no GitHub repository was selected or connected. Follow `GITHUB-PAGES.md` to publish and then perform its public-site checks. External publisher/profile destinations were preserved from the original site; their content and uptime were not independently audited.
+The initial GitHub deployment succeeded at https://neildizon.github.io/. External publisher/profile destinations were preserved from the original site; their content and uptime were not independently audited.
+
+## CV update verification
+
+- Read all seven supplied CV pages, including visual review of research, teaching and leadership tables.
+- Build and content checks passed for the updated dataset.
+- All five pages tested at 390, 768 and 1280 pixels: one primary heading each and no horizontal overflow.
+- Mobile navigation reaches Leadership and closes after selection. UNSW course history expands correctly.
+- No application errors or warnings during tested interactions.
+- Preserved all 21 original research URLs and earlier complete teaching/conference histories. New conference records are merged, not substituted for the older complete list.
+- Future session dates are explicitly marked Upcoming; Helsinki’s end date follows the CV.
