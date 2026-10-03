@@ -1,12 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Chip, Container, IconButton, Link, Stack, Typography } from '@mui/material';
 import { Link as RouterLink, NavLink, Route, Routes, useLocation } from 'react-router-dom';
-import { blues } from './theme';
+import { blues, mathFont } from './theme';
 import { profile } from './data/profile';
 import { publications, preprints, theses, researchAwards } from './data/research';
-import { awards, experience, evaluations, supervision } from './data/teaching';
+import { awards, experience, evaluations } from './data/teaching';
 import { conferences } from './data/conferences';
 import { leadership } from './data/leadership';
+import OptimisationBackdrop from './components/OptimisationBackdrop';
+import useScrollReveal from './components/useScrollReveal';
 
 const pages = [['Home', '/'], ['Research', '/research'], ['Teaching', '/teaching'], ['Conferences', '/conferences'], ['Leadership', '/leadership']];
 const Arrow = ({ diagonal = false }) => <Box component="span" aria-hidden="true" sx={{ ml: .8 }}>{diagonal ? '↗' : '→'}</Box>;
@@ -17,23 +19,24 @@ function Header() {
   const { pathname } = useLocation();
   useEffect(() => { setOpen(false); }, [pathname]);
   const navItems = pages.map(([label, path]) => <Link key={path} component={NavLink} to={path} end={path === '/'} onClick={() => setOpen(false)} sx={{
-    fontSize: '.875rem', fontWeight: 500, color: 'text.secondary', textDecoration: 'none', py: 1,
-    '&.active': { color: 'primary.main' }, '&:hover': { color: 'primary.main', textDecoration: 'none' },
+    fontSize: '.875rem', fontWeight: 500, color: 'text.secondary', textDecoration: 'none', px: 1.5, py: 1.25, borderRadius: 1,
+    transition: 'color 180ms ease, background-color 180ms ease',
+    '&.active': { color: 'primary.main', bgcolor: '#A8CBFF12' }, '&:hover': { color: 'primary.main', bgcolor: '#A8CBFF0A', textDecoration: 'none' },
   }}>{label}</Link>);
   return <Box component="header" onKeyDown={event => { if (event.key === 'Escape') { setOpen(false); document.getElementById('menu-toggle')?.focus(); } }} sx={{ position: 'sticky', top: 0, zIndex: 10, backgroundColor: '#0B1424F2', backdropFilter: 'blur(12px)', borderBottom: 1, borderColor: 'divider' }}>
     <Link href="#main-content" onClick={event => { event.preventDefault(); const content = document.getElementById('main-content'); content?.focus(); content?.scrollIntoView(); }} sx={{ position: 'absolute', left: 12, top: -100, p: 1, bgcolor: 'background.paper', '&:focus': { top: 10, zIndex: 20 } }}>Skip to content</Link>
     <Container>
       <Stack direction="row" sx={{ alignItems: 'center', justifyContent: 'space-between', minHeight: { xs: 72, md: 84 } }}>
-        <Link component={RouterLink} to="/" color="text.primary" sx={{ display: 'flex', gap: 1.5, alignItems: 'center', fontWeight: 600, textDecoration: 'none', '&:hover': { textDecoration: 'none' } }}>
+        <Link component={RouterLink} to="/" color="text.primary" sx={{ display: 'flex', gap: 1.25, alignItems: 'center', fontWeight: 600, textDecoration: 'none', '&:hover': { textDecoration: 'none' } }}>
           <Box component="svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false" sx={{ width: 30, height: 30 }}><path d="M5 26V6L27 26V6M5 26L27 6" stroke={blues.cobalt} strokeWidth="1.5" fill="none"/><circle cx="16" cy="16" r="2.5" fill={blues.cobalt}/></Box>
-          {profile.name}
+          <Box component="span" sx={{ fontFamily: mathFont, fontSize: '.95rem', letterSpacing: '.02em', whiteSpace: 'nowrap' }}>{profile.name}</Box>
         </Link>
-        <Stack component="nav" aria-label="Main navigation" direction="row" spacing={3} sx={{ display: { xs: 'none', md: 'flex' } }}>{navItems}</Stack>
+        <Stack component="nav" aria-label="Main navigation" direction="row" spacing={.5} sx={{ display: { xs: 'none', md: 'flex' } }}>{navItems}</Stack>
         <IconButton id="menu-toggle" aria-label={open ? 'Close navigation' : 'Open navigation'} aria-expanded={open} aria-controls={open ? 'mobile-navigation' : undefined} onClick={() => setOpen(!open)} sx={{ display: { md: 'none' }, color: 'text.primary' }}>
           <Box component="svg" viewBox="0 0 24 24" aria-hidden="true" sx={{ width: 24, height: 24 }}><path d={open ? 'M6 6L18 18M18 6L6 18' : 'M4 7H20M4 12H20M4 17H20'} stroke="currentColor" fill="none" strokeWidth="1.5" /></Box>
         </IconButton>
       </Stack>
-      {open && <Stack component="nav" id="mobile-navigation" aria-label="Mobile navigation" sx={{ display: { md: 'none' }, pb: 2 }}>{navItems}</Stack>}
+      {open && <Stack component="nav" id="mobile-navigation" aria-label="Mobile navigation" sx={{ display: { md: 'none' }, pt: 1.5, pb: 2, gap: .5, borderTop: 1, borderColor: 'divider' }}>{navItems}</Stack>}
     </Container>
   </Box>;
 }
@@ -64,12 +67,12 @@ function Publication({ item, compact = false }) {
 function Home() {
   return <>
     <Container>
-      <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1.25fr 1fr' }, alignItems: 'center', gap: { xs: 3, md: 5 }, pt: { xs: 7, md: 10 }, pb: { xs: 6, md: 9 } }}>
+      <Box sx={{ pt: { xs: 7, md: 10 }, pb: { xs: 6, md: 9 } }}>
         <Box>
           <Eyebrow>Applied mathematics · UNSW Sydney</Eyebrow>
-          <Typography variant="h1" sx={{ fontSize: { xs: '3.4rem', sm: '4.8rem', md: '5.4rem' }, mb: 3 }}>Neil D.<br />Dizon<Box component="span" aria-hidden="true" sx={{ color: 'primary.main' }}>.</Box></Typography>
-          <Typography sx={{ fontSize: '1.15rem', fontWeight: 500, mb: 2 }}>{profile.role}</Typography>
-          <Typography color="text.secondary" sx={{ maxWidth: 520 }}>{profile.introduction}</Typography>
+          <Typography variant="h1" sx={{ fontFamily: mathFont, fontWeight: 400, WebkitTextStroke: '.3px currentColor', fontSize: 'clamp(1.7rem, 8.5vw, 6.2rem)', letterSpacing: '.045em', wordSpacing: '-.22em', lineHeight: 1.2, textTransform: 'uppercase', whiteSpace: 'nowrap', mb: 3 }}>{profile.name.split('.')[0]}<Box component="span" sx={{ color: 'primary.main' }}>.</Box>{profile.name.split('.')[1]}</Typography>
+          <Typography sx={{ fontSize: { xs: '1.05rem', md: '1.15rem' }, fontWeight: 500, letterSpacing: '.01em', mb: 2 }}>{profile.role}</Typography>
+          <Typography color="text.secondary" sx={{ maxWidth: 560, lineHeight: 1.85 }}>{profile.introduction}</Typography>
           <Stack direction="row" sx={{ flexWrap: 'wrap', gap: 1.5, mt: 3.5 }}>
             <Button component={RouterLink} to="/research" variant="contained">Explore research<Arrow /></Button>
             <Button component={RouterLink} to="/teaching" variant="outlined">Teaching</Button>
@@ -82,10 +85,10 @@ function Home() {
       </Stack>
       <Box component="section" aria-labelledby="interests-title" sx={{ py: { xs: 7, md: 9 } }}>
         <Eyebrow>Research interests</Eyebrow>
-        <Typography id="interests-title" variant="h2" sx={{ mb: 4 }}>From mathematical structure<br />to computational methods.</Typography>
+        <Typography id="interests-title" variant="h2" sx={{ mb: 4, maxWidth: 620 }}>From mathematical structure<br />to computational methods.</Typography>
         <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: 'repeat(3, 1fr)' }, gap: 3 }}>
-          {profile.interests.map((group, i) => <Box key={group.title} sx={{ p: 3, bgcolor: [blues.ice, blues.sky, blues.powder][i], borderTop: `2px solid ${blues.periwinkle}`, borderRadius: '0 0 8px 8px' }}>
-            <Typography variant="overline" color="primary" sx={{ display: 'block', mb: 3 }}>0{i+1}</Typography>
+          {profile.interests.map((group, i) => <Box key={group.title} sx={{ p: { xs: 3, md: 3.5 }, bgcolor: [blues.ice, blues.sky, blues.powder][i], backgroundImage: 'linear-gradient(145deg, #A8CBFF07, transparent)', border: 1, borderColor: 'divider', borderTop: `2px solid ${blues.periwinkle}`, borderRadius: '0 0 8px 8px' }}>
+            <Typography variant="overline" color="primary" sx={{ display: 'block', mb: 2.5 }}>0{i+1}</Typography>
             <Typography component="h3" variant="h3" sx={{ mb: 2 }}>{group.title}</Typography>
             {group.items.map(item=><Typography key={item} variant="body2" color="text.secondary" sx={{ mb: .5 }}>{item}</Typography>)}
           </Box>)}
@@ -98,7 +101,7 @@ function Home() {
         <Link component={RouterLink} to="/research" sx={{ fontSize: '.875rem', fontWeight: 550 }}>View all research<Arrow /></Link>
       </Stack>{publications.slice(0, 3).map(item=><Publication key={item.title} item={item} compact />)}</Container>
     </Box>
-    <Container><Box sx={{ pt: { xs: 6, md: 8 }, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 4 }}>
+    <Container><Box component="section" aria-label="Teaching conferences and leadership" sx={{ pt: { xs: 6, md: 8 }, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 4 }}>
       <Box><Eyebrow>Beyond the page</Eyebrow><Typography variant="h2" sx={{ mb: 2 }}>Sharing ideas.<br />Building understanding.</Typography><Typography color="text.secondary" sx={{ mb: 2 }}>Explore my teaching, conference presentations, and academic leadership.</Typography><Stack direction="row" sx={{ gap: 3, flexWrap: 'wrap' }}><Link component={RouterLink} to="/teaching">Teaching<Arrow /></Link><Link component={RouterLink} to="/conferences">Conferences<Arrow /></Link><Link component={RouterLink} to="/leadership">Leadership<Arrow /></Link></Stack></Box>
     </Box></Container>
   </>;
@@ -153,9 +156,6 @@ function Teaching() {
         </Box>
       </Box>)}
     </Box>
-    <Box component="section" aria-labelledby="supervision-title" sx={{ mt: 7 }}><Typography id="supervision-title" variant="h2" sx={{ mb: 2 }}>Supervision and mentoring</Typography>
-      {supervision.map(entry => <Box component="article" key={entry.title} sx={{ py: 3, borderBottom: 1, borderColor: 'divider' }}>{entry.date && <Typography variant="body2" color="primary" sx={{ mb: 1 }}>{entry.date}</Typography>}<Typography component="h3" variant="h3" sx={{ mb: 1 }}>{entry.title}</Typography>{entry.institution && <Typography variant="body2" sx={{ mb: 1 }}>{entry.institution}</Typography>}<Typography variant="body2" color="text.secondary">{entry.detail}</Typography></Box>)}
-    </Box>
   </Container>;
 }
 
@@ -199,7 +199,8 @@ export default function App() {
       previousPath.current = pathname;
     }
   }, [pathname]);
-  return <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}><Header />
+  useScrollReveal(main, pathname);
+  return <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', isolation: 'isolate' }}><OptimisationBackdrop /><Header />
     <Box component="main" id="main-content" tabIndex={-1} ref={main} sx={{ flex: 1, '&:focus': { outline: 'none' } }}>
       <Routes><Route path="/" element={<Home />} /><Route path="/research" element={<Research />} /><Route path="/teaching" element={<Teaching />} /><Route path="/conferences" element={<Conferences />} /><Route path="/leadership" element={<Leadership />} /><Route path="*" element={<NotFound />} /></Routes>
     </Box><Footer /></Box>;
