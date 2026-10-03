@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 440" fill="none">
+  <defs>
+    <radialGradient id="glow">
+      <stop stop-color="#4274B6" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#4274B6" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <ellipse cx="251" cy="222" rx="230" ry="200" fill="url(#glow)"/>
+  <g transform="translate(251 222) rotate(-28)" stroke="#83A6E5" stroke-width="1.1">
+    <ellipse rx="35" ry="22"/>
+    <ellipse rx="63" ry="41" opacity="0.91"/>
+    <ellipse rx="91" ry="60" opacity="0.82"/>
+    <ellipse rx="119" ry="79" opacity="0.73"/>
+    <ellipse rx="147" ry="98" opacity="0.64"/>
+    <ellipse rx="175" ry="117" opacity="0.55"/>
+  </g>
+  <path d="M59 337L394 105M81 96L359 361M98 356L98 77M66 335L422 335" stroke="#496A94" stroke-width="1"/>
+  <path d="M108 300L188 280L179 217L259 229L251 222" stroke="#8FB8FF" stroke-width="1.8"/>
+  <path d="M110 111L389 189L251 222Z" fill="#8FB8FF" fill-opacity="0.025" stroke="#8FB8FF" stroke-opacity="0.45"/>
+  <g fill="#14243B" stroke="#8FB8FF" stroke-width="1.5">
+    <circle cx="108" cy="300" r="3.5"/>
+    <circle cx="188" cy="280" r="3.5"/>
+    <circle cx="179" cy="217" r="3.5"/>
+    <circle cx="259" cy="229" r="3.5"/>
+  </g>
+  <circle cx="251" cy="222" r="4" fill="#8FB8FF"/>
+  <circle cx="251" cy="222" r="12" stroke="#8FB8FF" stroke-opacity="0.25"/>
+</svg>
