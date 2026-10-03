@@ -1,6 +1,6 @@
 # Neil D. Dizon — academic website
 
-A custom React + MUI website with four pages, static mathematical SVG artwork, and GitHub Pages deployment. No Bootstrap, Sass, backend, or database.
+A custom React + MUI website with five pages, static mathematical SVG artwork, and GitHub Pages deployment. No Bootstrap, Sass, backend, or database.
 
 ## Run on your computer
 
@@ -55,10 +55,24 @@ Migrated from https://sites.google.com/view/neildizon/ on 3 October 2026. Origin
 - Preserved 2 awards, 5 teaching roles, 29 teaching terms, and 76 course entries.
 - Preserved 17 oral presentations, 2 poster presentations, and 8 attendance records.
 - Used UNSW as the current affiliation, as confirmed by you.
-- Helsinki is labelled with the documented 2023 teaching year and March 2022 position start. No employment end date is inferred.
+- Helsinki is labelled March 2022–June 2024, with its documented 2023 teaching courses retained. The updated CV confirms the Helsinki appointment ended in June 2024.
 - Removed a duplicated UP Manila line in the Newcastle teaching entry and the repeated institution line in the instructor entry; corrected “write solutios” to “wrote solutions”.
 - Bibliographic metadata follows the original site, including its author initials, journal names, years, and under-review labels. It has not been independently re-verified against publishers.
 - The homepage introduction is a concise restatement of the source research interests. No new credentials were added.
 - The landscape banner and wavelet image gallery are replaced by decorative mathematical SVG artwork.
 
 No PDF CV download is displayed. Add a PDF and download link later if desired.
+
+## Updated CV content
+
+Research, teaching, conference talks, and leadership were updated from Neil-CV.pdf supplied on 3 October 2026. The CV supplements the original complete histories: earlier courses, research links, theses, posters, and attendance remain.
+
+- Research: 17 published/accepted papers with CV annotations, 6 submitted papers, 3 theses, 21 retained URLs, and 2 research awards.
+- Teaching: 7 roles, 77 course entries, 2 student-evaluation summaries, 3 supervision/mentoring entries, and the CV’s combined teaching-award record.
+- Conferences: 21 oral presentations, 2 posters, and 8 attendance records.
+- Leadership: 20 entries in `src/data/leadership.js`, including 3 explicitly upcoming organising roles.
+- Corrected MATH1110 and MATH1120 course codes to match the updated CV. Corrected the 2024 SIAM organising entry’s OP23 label to Imaging Science 2024, consistent with the same CV’s talk list.
+- Updated titles, author initials/order, submission years, and venue details to the CV. Publication annotations are the author’s supplied descriptions, not independent assessments.
+- The CV PDF, referee details, and personal background information are not published as assets.
+
+Live website: https://neildizon.github.io/
