@@ -1,5 +1,4 @@
 import { createTheme } from '@mui/material/styles';
-import optimisationBackground from './assets/optimisation-background.svg';
 
 export const blues = {
   mist: '#0B1424',
@@ -12,6 +11,8 @@ export const blues = {
   navy: '#0B1424',
 };
 
+export const mathFont = '"Courier New", "Liberation Mono", ui-monospace, monospace';
+
 export const theme = createTheme({
   palette: {
     mode: 'dark',
@@ -23,7 +24,7 @@ export const theme = createTheme({
   typography: {
     fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
     h1: { fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 400, letterSpacing: '-0.035em', lineHeight: 1.08 },
-    h2: { fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 400, fontSize: '2rem', letterSpacing: '-0.025em', lineHeight: 1.25 },
+    h2: { fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 400, fontSize: 'clamp(1.65rem, 3vw, 2.1rem)', letterSpacing: '-0.025em', lineHeight: 1.3 },
     h3: { fontWeight: 600, fontSize: '1.2rem', letterSpacing: '-0.015em', lineHeight: 1.45 },
     body1: { fontSize: '1rem', lineHeight: 1.8 },
     body2: { fontSize: '.875rem', lineHeight: 1.7 },
@@ -33,7 +34,7 @@ export const theme = createTheme({
   shape: { borderRadius: 8 },
   components: {
     MuiContainer: { styleOverrides: { root: { maxWidth: '1156px !important' } } },
-    MuiButton: { defaultProps: { disableElevation: true }, styleOverrides: { root: { borderRadius: 6, padding: '10px 18px' } } },
+    MuiButton: { defaultProps: { disableElevation: true }, styleOverrides: { root: { borderRadius: 6, padding: '11px 20px', minHeight: 44 }, outlined: { borderColor: '#A8CBFF70' } } },
     MuiLink: { defaultProps: { underline: 'hover' } },
     MuiCssBaseline: { styleOverrides: {
       html: { scrollPaddingTop: '100px' },
@@ -43,27 +44,23 @@ export const theme = createTheme({
         backgroundSize: '32px 32px, 100% 100%, 100% 100%',
         backgroundRepeat: 'repeat, no-repeat, no-repeat',
         backgroundAttachment: 'fixed',
-        '&::before': {
-          content: '""',
-          position: 'fixed',
-          inset: 0,
-          zIndex: 0,
-          pointerEvents: 'none',
-          backgroundImage: `url("${optimisationBackground}")`,
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'min(76vw, 1020px) auto',
-          backgroundPosition: 'calc(100% + 70px) 45%',
-          opacity: .28,
-          maskImage: 'linear-gradient(to right, transparent, rgba(0,0,0,.35) 35%, black 75%)',
-          '@media (max-width: 600px)': {
-            backgroundSize: '580px auto',
-            backgroundPosition: 'calc(100% + 170px) 35%',
-            opacity: .18,
-          },
-        },
       },
       '#root': { position: 'relative', zIndex: 1 },
       '*': { boxSizing: 'border-box' },
+      '.scroll-reveal': {
+        opacity: 0,
+        transform: 'translateY(22px)',
+        transition: 'opacity 650ms ease, transform 650ms cubic-bezier(.2,.7,.2,1)',
+      },
+      '.scroll-reveal.is-revealed, .scroll-reveal:focus-within': { opacity: 1, transform: 'none' },
+      '@media (prefers-reduced-motion: reduce)': {
+        '.scroll-reveal': { opacity: 1, transform: 'none', transition: 'none' },
+        '[data-motion="preview"] .scroll-reveal': {
+          opacity: 0, transform: 'translateY(22px)',
+          transition: 'opacity 650ms ease, transform 650ms cubic-bezier(.2,.7,.2,1)',
+        },
+        '[data-motion="preview"] .scroll-reveal.is-revealed, [data-motion="preview"] .scroll-reveal:focus-within': { opacity: 1, transform: 'none' },
+      },
       'a, button, [tabindex]': { WebkitTapHighlightColor: 'transparent' },
       ':focus-visible': { outline: '3px solid #8FB8FF', outlineOffset: '4px' },
       '::selection': { background: '#345580', color: '#FFFFFF' },
