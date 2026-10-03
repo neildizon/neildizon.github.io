@@ -70,7 +70,7 @@ function Home() {
       <Box sx={{ pt: { xs: 7, md: 10 }, pb: { xs: 6, md: 9 } }}>
         <Box>
           <Eyebrow>Applied mathematics · UNSW Sydney</Eyebrow>
-          <Typography variant="h1" sx={{ fontFamily: mathFont, fontWeight: 400, WebkitTextStroke: '.3px currentColor', fontSize: 'clamp(1.7rem, 8.5vw, 6.2rem)', letterSpacing: '.045em', wordSpacing: '-.22em', lineHeight: 1.2, textTransform: 'uppercase', whiteSpace: 'nowrap', mb: 3 }}>{profile.name.split('.')[0]}<Box component="span" sx={{ color: 'primary.main' }}>.</Box>{profile.name.split('.')[1]}</Typography>
+          <Typography variant="h1" sx={{ fontSize: { xs: '2.7rem', md: '4rem' }, textTransform: 'uppercase', mb: 3 }}>{profile.name}</Typography>
           <Typography sx={{ fontSize: { xs: '1.05rem', md: '1.15rem' }, fontWeight: 500, letterSpacing: '.01em', mb: 2 }}>{profile.role}</Typography>
           <Typography color="text.secondary" sx={{ maxWidth: 560, lineHeight: 1.85 }}>{profile.introduction}</Typography>
           <Stack direction="row" sx={{ flexWrap: 'wrap', gap: 1.5, mt: 3.5 }}>
