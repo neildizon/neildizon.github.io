@@ -41,7 +41,7 @@ Copy an existing entry to add another. Put new research records first, keeping y
 - `src/theme.js`: palette, typography, spacing defaults, component styling.
 - Typography pairs Georgia serif display headings with sans-serif body text and monospace section labels; all use local system fonts and need no external font download.
 - `src/App.jsx`: page layout and MUI `sx` styles.
-- `src/assets/optimisation-background.svg`: caption-free optimisation contours, positioned as a single subtle background behind the page content. The full-page graphing-dot grid and stronger navy-to-blue gradient live in `src/theme.js`, alongside the illustration's opacity, position, and responsive scale.
+- `src/assets/optimisation-background.svg`: caption-free optimisation contours, positioned as a single subtle background behind the page content. The graph renders as an inline vector through `src/components/OptimisationBackdrop.jsx`, which controls its opacity, position and responsive scale. The full-page graphing-dot grid and navy-to-blue gradient live in `src/theme.js`.
 - `public/favicon.svg`: geometric site icon.
 - `index.html`: site description and initial title.
 
@@ -68,7 +68,7 @@ No PDF CV download is displayed. Add a PDF and download link later if desired.
 Research, teaching, conference talks, and leadership were updated from Neil-CV.pdf supplied on 3 October 2026. The CV supplements the original complete histories: earlier courses, research links, theses, posters, and attendance remain.
 
 - Research: 17 published/accepted papers with CV annotations, 6 submitted papers, 3 theses, 21 retained URLs, and 2 research awards.
-- Teaching: 7 roles, 77 course entries, 2 student-evaluation summaries, 3 supervision/mentoring entries, and the CV’s combined teaching-award record.
+- Teaching: 7 roles, 77 course entries, 2 student-evaluation summaries, and the CV’s combined teaching-award record. Supervision and mentoring is retained in the data file but is no longer displayed, at the author’s request.
 - Conferences: 21 oral presentations, 2 posters, and 8 attendance records.
 - Leadership: 20 entries in `src/data/leadership.js`, including 3 explicitly upcoming organising roles.
 - Corrected MATH1110 and MATH1120 course codes to match the updated CV. Corrected the 2024 SIAM organising entry’s OP23 label to Imaging Science 2024, consistent with the same CV’s talk list.
@@ -76,3 +76,7 @@ Research, teaching, conference talks, and leadership were updated from Neil-CV.p
 - The CV PDF, referee details, and personal background information are not published as assets.
 
 Live website: https://neildizon.github.io/
+
+## Design and motion
+
+The homepage name uses a larger, widely spaced Courier font on one line, with a blue middle-initial dot. Navigation has clear active states and roomier mobile links. Later sections fade and rise gently into view once; keyboard focus reveals their content immediately. Reduced-motion preferences disable the effect. An explicit localhost-only preview at `http://127.0.0.1:4173/?motion=preview#/` enables motion for design review without changing system preferences. The inline optimisation backdrop renders as a vector, slightly smaller and shifted left.
