@@ -1,10 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 440" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 440" fill="none" shape-rendering="geometricPrecision" stroke-linecap="round" stroke-linejoin="round">
   <defs>
+    <linearGradient id="optimisation-fade" x1="0" y1="0" x2="480" y2="0" gradientUnits="userSpaceOnUse">
+      <stop stop-color="white" stop-opacity="0"/>
+      <stop offset="0.3" stop-color="white" stop-opacity="0.35"/>
+      <stop offset="0.7" stop-color="white"/>
+    </linearGradient>
+    <mask id="optimisation-mask" x="0" y="0" width="480" height="440" maskUnits="userSpaceOnUse">
+      <rect width="480" height="440" fill="url(#optimisation-fade)"/>
+    </mask>
     <radialGradient id="glow">
       <stop stop-color="#4274B6" stop-opacity="0.35"/>
       <stop offset="1" stop-color="#4274B6" stop-opacity="0"/>
     </radialGradient>
   </defs>
+  <g mask="url(#optimisation-mask)">
   <ellipse cx="251" cy="222" rx="230" ry="200" fill="url(#glow)"/>
   <g transform="translate(251 222) rotate(-28)" stroke="#83A6E5" stroke-width="1.1">
     <ellipse rx="35" ry="22"/>
@@ -25,4 +34,5 @@
   </g>
   <circle cx="251" cy="222" r="4" fill="#8FB8FF"/>
   <circle cx="251" cy="222" r="12" stroke="#8FB8FF" stroke-opacity="0.25"/>
+  </g>
 </svg>
