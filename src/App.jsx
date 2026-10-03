@@ -10,7 +10,7 @@ import { leadership } from './data/leadership';
 import OptimisationBackdrop from './components/OptimisationBackdrop';
 import useScrollReveal from './components/useScrollReveal';
 
-const pages = [['Home', '/'], ['Research', '/research'], ['Teaching', '/teaching'], ['Conferences', '/conferences'], ['Leadership', '/leadership']];
+const pages = [['Home', '/'], ['Research', '/research'], ['Teaching', '/teaching'], ['Conferences', '/conferences'], ['Service', '/leadership']];
 const Arrow = ({ diagonal = false }) => <Box component="span" aria-hidden="true" sx={{ ml: .8 }}>{diagonal ? '↗' : '→'}</Box>;
 const Eyebrow = ({ children }) => <Typography component="p" variant="overline" color="primary" sx={{ mb: 2 }}>{children}</Typography>;
 
@@ -101,8 +101,8 @@ function Home() {
         <Link component={RouterLink} to="/research" sx={{ fontSize: '.875rem', fontWeight: 550 }}>View all research<Arrow /></Link>
       </Stack>{publications.slice(0, 3).map(item=><Publication key={item.title} item={item} compact />)}</Container>
     </Box>
-    <Container><Box component="section" aria-label="Teaching conferences and leadership" sx={{ pt: { xs: 6, md: 8 }, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 4 }}>
-      <Box><Eyebrow>Beyond the page</Eyebrow><Typography variant="h2" sx={{ mb: 2 }}>Sharing ideas.<br />Building understanding.</Typography><Typography color="text.secondary" sx={{ mb: 2 }}>Explore my teaching, conference presentations, and academic leadership.</Typography><Stack direction="row" sx={{ gap: 3, flexWrap: 'wrap' }}><Link component={RouterLink} to="/teaching">Teaching<Arrow /></Link><Link component={RouterLink} to="/conferences">Conferences<Arrow /></Link><Link component={RouterLink} to="/leadership">Leadership<Arrow /></Link></Stack></Box>
+    <Container><Box component="section" aria-label="Teaching conferences and service" sx={{ pt: { xs: 6, md: 8 }, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 4 }}>
+      <Box><Eyebrow>Beyond the page</Eyebrow><Typography variant="h2" sx={{ mb: 2 }}>Sharing ideas.<br />Building understanding.</Typography><Typography color="text.secondary" sx={{ mb: 2 }}>Explore my teaching, conference presentations, and academic service.</Typography><Stack direction="row" sx={{ gap: 3, flexWrap: 'wrap' }}><Link component={RouterLink} to="/teaching">Teaching<Arrow /></Link><Link component={RouterLink} to="/conferences">Conferences<Arrow /></Link><Link component={RouterLink} to="/leadership">Service<Arrow /></Link></Stack></Box>
     </Box></Container>
   </>;
 }
@@ -173,7 +173,7 @@ function Conferences() {
 
 function Leadership() {
   return <Container>
-    <PageIntro eyebrow="Leadership and engagement" title="Connecting people and ideas." description="Conference and workshop organising, committee service, journal reviewing, and engagement with the mathematical community." />
+    <PageIntro eyebrow="Service and engagement" title="Connecting people and ideas." description="Conference and workshop organising, committee service, journal reviewing, and engagement with the mathematical community." />
     {Object.entries(leadership).map(([category, entries], sectionIndex) => <Box component="section" key={category} aria-labelledby={`leadership-section-${sectionIndex}`} sx={{ mb: 7 }}>
       <Typography id={`leadership-section-${sectionIndex}`} variant="h2" sx={{ mb: 2 }}>{category}</Typography>
       {entries.map((entry, index) => <Box component="article" key={`${entry.date}-${index}`} sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '150px 1fr' }, gap: { xs: 1, sm: 4 }, py: 3, borderBottom: 1, borderColor: 'divider' }}>
