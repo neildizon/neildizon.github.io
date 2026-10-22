@@ -5,7 +5,8 @@ export const publications = [
     "authors": "Dizon, N. D., Huang, Q. Y., Jeyakumar, V.",
     "title": "Minimizing Worst-Case Polynomial Expectation over Wasserstein Balls: Convergent SDP Hierarchy, Exact SDP Relaxation and Optimal Distribution Extraction",
     "venue": "To appear, Optimization Methods and Software.",
-    "url": null
+    "url": null,
+    "annotation": "Develops a convergent SDP hierarchy, an exact SDP relaxation, and a method to extract optimal distributions for worst-case polynomial expectations over Wasserstein balls."
   },
   {
     "year": 2026,
