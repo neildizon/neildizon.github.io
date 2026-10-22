@@ -2,6 +2,13 @@
 export const publications = [
   {
     "year": 2026,
+    "authors": "Dizon, N. D., Huang, Q. Y., Jeyakumar, V.",
+    "title": "Minimizing Worst-Case Polynomial Expectation over Wasserstein Balls: Convergent SDP Hierarchy, Exact SDP Relaxation and Optimal Distribution Extraction",
+    "venue": "To appear, Optimization Methods and Software.",
+    "url": null
+  },
+  {
+    "year": 2026,
     "authors": "Dizon, N. D., Jeyakumar, V., Li, G., Zhao, L.",
     "title": "Primal-Dual Proximal Splitting Methods for Wasserstein Distributionally Robust Convex Semidefinite Optimization",
     "venue": "To appear in Applied Mathematics and Optimization.",
@@ -150,13 +157,6 @@ export const preprints = [
     "authors": "Dizon, N. D., Huang, Q. Y., Jeyakumar, V., Li, G.",
     "title": "Beyond Optimal Values: SDP-Based Optimal Distribution Recovery in Piecewise Polynomial Expectation over Wasserstein Balls",
     "venue": "Under review, Journal of Global Optimization.",
-    "url": null
-  },
-  {
-    "year": 2026,
-    "authors": "Dizon, N. D., Huang, Q. Y., Jeyakumar, V.",
-    "title": "Minimizing Worst-Case Polynomial Expectation over Wasserstein Balls: Convergent SDP Hierarchy, Exact SDP Relaxation and Optimal Distribution Extraction",
-    "venue": "Under review, Optimization Methods and Software.",
     "url": null
   },
   {
