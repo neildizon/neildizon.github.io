@@ -7,7 +7,7 @@ import { profile } from '../src/data/profile.js';
 
 // Source-migration checks: update these totals when intentionally adding/removing records.
 assert.equal(publications.length, 18);
-assert.equal(preprints.length, 5);
+assert.equal(preprints.length, 6);
 assert.equal(theses.length, 3);
 assert.equal(awards.length, 1);
 assert.equal(researchAwards.length, 2);
@@ -35,4 +35,4 @@ assert.equal([...publications, ...preprints, ...theses].filter(item => item.url)
 for (const link of profile.links) assert.equal(new URL(link.url).protocol, 'https:');
 assert.equal(profile.institution, 'UNSW Sydney');
 assert.equal(experience.find(entry => entry.institution.includes('Helsinki')).date, 'Mar 2022 – Jun 2024');
-console.log('Content checks passed: 26 research records, 31 conference records, 7 teaching roles, 77 course entries, 20 leadership entries.');
+console.log('Content checks passed: 27 research records, 31 conference records, 7 teaching roles, 77 course entries, 20 leadership entries.');
