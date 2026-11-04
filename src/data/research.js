@@ -4,7 +4,7 @@ export const publications = [
     "year": 2026,
     "authors": "Dizon, N. D., Huang, Q. Y., Jeyakumar, V.",
     "title": "Minimizing Worst-Case Polynomial Expectation over Wasserstein Balls: Convergent SDP Hierarchy, Exact SDP Relaxation and Optimal Distribution Extraction",
-    "venue": "To appear, Optimization Methods and Software.",
+    "venue": "To appear in Optimization Methods and Software.",
     "url": null,
     "annotation": "Develops a convergent SDP hierarchy, an exact SDP relaxation, and a method to extract optimal distributions for worst-case polynomial expectations over Wasserstein balls."
   },
@@ -12,7 +12,7 @@ export const publications = [
     "year": 2026,
     "authors": "Dizon, N. D., Jeyakumar, V., Li, G., Zhao, L.",
     "title": "Primal-Dual Proximal Splitting Methods for Wasserstein Distributionally Robust Convex Semidefinite Optimization",
-    "venue": "To appear in Applied Mathematics and Optimization.",
+    "venue": "Applied Mathematics and Optimization.",
     "url": "https://doi.org/10.1007/s00245-026-10524-x",
     "annotation": "Develops a scalable computational scheme for optimisation problems under distributional uncertainty, with applications to machine learning and portfolio management."
   },
@@ -146,6 +146,13 @@ export const publications = [
   }
 ];
 export const preprints = [
+  {
+    "year": 2026,
+    "authors": "Huang, Q. Y., Dizon, N. D., Jeyakumar, V., Li, G.",
+    "title": "Advancing Two-Stage Wasserstein Distributionally Robust Optimisation: Exact Tractable Conic Programs for Convex Quadratic and Piecewise Affine Recourse",
+    "venue": "Under review, Mathematics of Operations Research.",
+    "url": null
+  },
   {
     "year": 2026,
     "authors": "Dizon, N. D., Huang, Q. Y., Jeyakumar, V., Li, G., Tammer, C.",
