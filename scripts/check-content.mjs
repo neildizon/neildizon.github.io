@@ -31,7 +31,7 @@ for (const records of [publications, preprints, theses]) {
     if (item.url) assert.equal(new URL(item.url).protocol, 'https:');
   }
 }
-assert.equal([...publications, ...preprints, ...theses].filter(item => item.url).length, 21);
+assert.equal([...publications, ...preprints, ...theses].filter(item => item.url).length, 22);
 for (const link of profile.links) assert.equal(new URL(link.url).protocol, 'https:');
 assert.equal(profile.institution, 'UNSW Sydney');
 assert.equal(experience.find(entry => entry.institution.includes('Helsinki')).date, 'Mar 2022 – Jun 2024');
