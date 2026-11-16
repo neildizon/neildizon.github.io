@@ -7,7 +7,7 @@ import { profile } from '../src/data/profile.js';
 
 // Source-migration checks: update these totals when intentionally adding/removing records.
 assert.equal(publications.length, 18);
-assert.equal(preprints.length, 6);
+assert.equal(preprints.length, 7);
 assert.equal(theses.length, 3);
 assert.equal(awards.length, 1);
 assert.equal(researchAwards.length, 2);
