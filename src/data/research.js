@@ -155,6 +155,13 @@ export const preprints = [
   },
   {
     "year": 2026,
+    "authors": "Dizon, N. D., Jeyakumar, V., Li, G.",
+    "title": "Hidden Convex Quadratically Constrained Quadratic Programs and Shor Relaxations: New Connections and Applications to Global Solution Recovery and Proximal Formulas",
+    "venue": "Under review, Optimization.",
+    "url": null
+  },
+  {
+    "year": 2026,
     "authors": "Dizon, N. D., Huang, Q. Y., Jeyakumar, V., Li, G., Tammer, C.",
     "title": "Multi-Objective Stochastic Optimisation under Distributional Ambiguity: Data-Driven Robust Efficient Solutions via Semi-Definite Programming",
     "venue": "Under review, European Journal of Operational Research.",
