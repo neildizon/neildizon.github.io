@@ -2,14 +2,9 @@
 
 These instructions are for the supplied project. GitHub Pages settings follow [Vite's official deployment guide](https://vite.dev/guide/static-deploy.html#github-pages).
 
-## 1. Choose your free address
+## 1. Use your free address
 
-Find your GitHub username in your account profile. Create a **public** repository using one of these names:
-
-- **Recommended:** `YOUR-USERNAME.github.io` → your address will be `https://YOUR-USERNAME.github.io/`.
-- Alternatively, `neil-dizon-website` → your address will be `https://YOUR-USERNAME.github.io/neil-dizon-website/`.
-
-Replace `YOUR-USERNAME` with your actual GitHub username. The project supports both options without editing the Vite configuration.
+This project is configured for the **public** repository `neildizon/neildizon.github.io` and the address `https://neildizon.github.io/`. The canonical URLs in `src/site.js` and the root base in `vite.config.js` match this address. Update both if moving the site elsewhere.
 
 On GitHub, choose **New repository**, enter the name, select **Public**, and click **Create repository**. Leave the initial README, licence, and `.gitignore` options unchecked; the project already includes its own files. GitHub Free supports Pages from public repositories; the website and the uploaded source code will be public.
 
@@ -59,7 +54,7 @@ If you prefer GitHub Desktop, add this folder as a local repository, create its 
 2. Open **Deploy academic website** and wait for the run to succeed.
 3. Open **Settings → Pages** and follow the website link.
 4. Test Home, Research, Teaching, Conferences, and the contact and profile links.
-5. Open the research address ending in `/#/research` in a new tab, and refresh it to check direct navigation.
+5. Open `/research/`, `/teaching/`, `/conferences/`, and `/leadership/` in new tabs, and refresh them to check direct navigation. Previously shared `/#/research` links redirect to the clean address.
 
 Your free `github.io` address already has DNS and HTTPS. You do not need to register a domain or configure DNS to use it.
 
@@ -87,10 +82,23 @@ GitHub Actions automatically rebuilds and deploys the updated website. Keep the 
 
 - **No deployment:** confirm your branch is `main`, the `.github/workflows/deploy.yml` file is present, and Pages Source is **GitHub Actions**. You can also select **Run workflow** in the Actions tab after enabling Pages.
 - **Workflow fails:** open the failed step in Actions. If the content check fails after an intentional addition, update the expected totals in `scripts/check-content.mjs`.
-- **Blank page:** confirm `vite.config.js` still uses `base: './'` and that GitHub deploys the `dist` artifact through the supplied workflow. Uploading the React source directly as a branch-based Pages site will not build it.
+- **Blank page:** confirm `vite.config.js` uses `base: '/'`, the workflow runs `npm run build`, and GitHub deploys the resulting `dist` artifact. The build creates a complete HTML file for every page. Uploading the React source directly as a branch-based Pages site will not build it.
 - **Old content:** confirm the most recent Actions run succeeded, then refresh the browser.
 - **Push rejected:** these commands assume a new empty repository. If you created a GitHub README first, clone that repository into a new folder, copy this project's files into it (including `.github`), then commit and push from the clone.
 
 ## Optional: your own domain later
 
 You can purchase a domain separately, then follow [GitHub's custom-domain guide](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site). Configure it in Pages settings and add the appropriate DNS records at your registrar. Custom-domain registration generally has an annual cost; the initial `github.io` address avoids that expense.
+
+## Google Search indexing
+
+The build publishes a sitemap at `https://neildizon.github.io/sitemap.xml`, referenced by `robots.txt`. Every page has a title, description, canonical URL, and complete initial HTML. These make the content discoverable; Google decides whether and when to index it.
+
+1. Open [Google Search Console](https://search.google.com/search-console/) using your own Google account.
+2. Add a **URL prefix** property for `https://neildizon.github.io/`. This works without control over the DNS settings of `github.io`.
+3. Choose **HTML tag** verification and copy the exact `google-site-verification` meta tag into the `<head>` of `index.html`, outside the `page-metadata` markers. Alternatively, place Google's exact HTML verification file in `public/`.
+4. Publish the change, confirm the tag or file is live, and click **Verify** in Search Console. Keep the verification tag or file in future versions.
+5. Submit `https://neildizon.github.io/sitemap.xml` under **Sitemaps**.
+6. Inspect `https://neildizon.github.io/`, run the live test, and choose **Request indexing**. Inspect the other clean page URLs if needed.
+
+Search Console's indexing report supplies the actual status or exclusion reason. A successful request does not guarantee inclusion or a particular ranking. Google says crawling can take days to weeks: [requesting a recrawl](https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl).

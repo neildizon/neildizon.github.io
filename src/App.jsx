@@ -9,8 +9,9 @@ import { conferences } from './data/conferences';
 import { leadership } from './data/leadership';
 import OptimisationBackdrop from './components/OptimisationBackdrop';
 import useScrollReveal from './components/useScrollReveal';
+import { sitePages, updatePageMetadata } from './site';
 
-const pages = [['Home', '/'], ['Research', '/research'], ['Teaching', '/teaching'], ['Conferences', '/conferences'], ['Service', '/leadership']];
+const pages = sitePages.map(({ label, path }) => [label, path]);
 const Arrow = ({ diagonal = false }) => <Box component="span" aria-hidden="true" sx={{ ml: .8 }}>{diagonal ? '↗' : '→'}</Box>;
 const Eyebrow = ({ children }) => <Typography component="p" variant="overline" color="primary" sx={{ mb: 2 }}>{children}</Typography>;
 
@@ -74,8 +75,8 @@ function Home() {
           <Typography sx={{ fontSize: { xs: '1.05rem', md: '1.15rem' }, fontWeight: 500, letterSpacing: '.01em', mb: 2 }}>{profile.role}</Typography>
           <Typography color="text.secondary" sx={{ maxWidth: 560, lineHeight: 1.85 }}>{profile.introduction}</Typography>
           <Stack direction="row" sx={{ flexWrap: 'wrap', gap: 1.5, mt: 3.5 }}>
-            <Button component={RouterLink} to="/research" variant="contained">Explore research<Arrow /></Button>
-            <Button component={RouterLink} to="/teaching" variant="outlined">Teaching</Button>
+            <Button component={RouterLink} to="/research/" variant="contained">Explore research<Arrow /></Button>
+            <Button component={RouterLink} to="/teaching/" variant="outlined">Teaching</Button>
           </Stack>
         </Box>
       </Box>
@@ -98,11 +99,11 @@ function Home() {
     <Box component="section" aria-labelledby="recent-title" sx={{ bgcolor: blues.powder, py: { xs: 6, md: 8 } }}>
       <Container><Stack direction={{ xs: 'column', sm: 'row' }} sx={{ justifyContent: 'space-between', alignItems: { sm: 'center' }, gap: 2, mb: 2 }}>
         <Box><Eyebrow>Latest work</Eyebrow><Typography id="recent-title" variant="h2">Recent publications</Typography></Box>
-        <Link component={RouterLink} to="/research" sx={{ fontSize: '.875rem', fontWeight: 550 }}>View all research<Arrow /></Link>
+        <Link component={RouterLink} to="/research/" sx={{ fontSize: '.875rem', fontWeight: 550 }}>View all research<Arrow /></Link>
       </Stack>{publications.slice(0, 3).map(item=><Publication key={item.title} item={item} compact />)}</Container>
     </Box>
     <Container><Box component="section" aria-label="Teaching conferences and service" sx={{ pt: { xs: 6, md: 8 }, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 4 }}>
-      <Box><Eyebrow>Beyond the page</Eyebrow><Typography variant="h2" sx={{ mb: 2 }}>Sharing ideas.<br />Building understanding.</Typography><Typography color="text.secondary" sx={{ mb: 2 }}>Explore my teaching, conference presentations, and academic service.</Typography><Stack direction="row" sx={{ gap: 3, flexWrap: 'wrap' }}><Link component={RouterLink} to="/teaching">Teaching<Arrow /></Link><Link component={RouterLink} to="/conferences">Conferences<Arrow /></Link><Link component={RouterLink} to="/leadership">Service<Arrow /></Link></Stack></Box>
+      <Box><Eyebrow>Beyond the page</Eyebrow><Typography variant="h2" sx={{ mb: 2 }}>Sharing ideas.<br />Building understanding.</Typography><Typography color="text.secondary" sx={{ mb: 2 }}>Explore my teaching, conference presentations, and academic service.</Typography><Stack direction="row" sx={{ gap: 3, flexWrap: 'wrap' }}><Link component={RouterLink} to="/teaching/">Teaching<Arrow /></Link><Link component={RouterLink} to="/conferences/">Conferences<Arrow /></Link><Link component={RouterLink} to="/leadership/">Service<Arrow /></Link></Stack></Box>
     </Box></Container>
   </>;
 }
@@ -191,8 +192,7 @@ export default function App() {
   const main = useRef(null);
   const previousPath = useRef(pathname);
   useEffect(() => {
-    const page = pages.find(([, path])=>path===pathname)?.[0] ?? 'Page not found';
-    document.title = `${profile.name} | ${page === 'Home' ? 'Applied Mathematics' : page}`;
+    updatePageMetadata(pathname);
     if (previousPath.current !== pathname) {
       window.scrollTo(0, 0);
       main.current?.focus({ preventScroll: true });
