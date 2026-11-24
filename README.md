@@ -45,7 +45,9 @@ Copy an existing entry to add another. Put new research records first, keeping y
 - `public/favicon.svg`: geometric site icon.
 - `index.html`: site description and initial title.
 
-All styling uses MUI and Emotion. Hash routing makes links such as `/#/research` work when opened directly on GitHub Pages. Relative build assets work with both a root address and a repository address.
+All styling uses MUI and Emotion. Each build renders the complete content of all five pages into HTML, so search engines can read the site without running JavaScript. Navigation uses clean addresses such as `/research/`; old links such as `/#/research` redirect to the matching page. GitHub Pages serves each address directly from its own directory.
+
+This project is configured for `https://neildizon.github.io/`. `src/site.js` contains the canonical website address and each page's title and description. The build generates `sitemap.xml`, `robots.txt`, and a `404.html` error page. Changing the domain or publishing under a repository subpath requires updating the canonical address and deployment base.
 
 ## Content provenance
 
